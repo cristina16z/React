@@ -7,6 +7,8 @@ import { Usuario } from './Usuari.jsx'
 
 import { Cart } from './Components/Cart/Cart.jsx'
 
+import { Comptador } from './Components/Comptador/Comptador.jsx'
+
 function App() {
 
   const llistaProductes = [{name:"Portàtil", preu:500, desc:"Portàtil Asus"},
@@ -23,7 +25,6 @@ function App() {
       
 
       <section className='products-container'>
-
         {
           llistaProductes.map((product, index) => (
             <Cart key={index} name={product.name} preu={product.preu} desc={product.desc}/>
@@ -31,9 +32,10 @@ function App() {
 
         }
         
-       
-
       </section>
+
+        <Comptador/>
+
 
     </div>
   )
