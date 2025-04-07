@@ -1,15 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Comptador() {
 
     //HOOKS 
     const [comp, setComp] = useState(0);
+    const [pokemon, setPokemon] = useState("Pendent de carregar informació...");
+
+
+    useEffect(()=> {
+
+        console.log("Renderitzar component")
+        const getPokemon = async function(){
+
+            const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+    
+            if (!response.ok){
+                throw new Error("Pokemon no trobat");
+            }
+    
+            const data = await response.json();
+
+            setPokemon(data.name);
+         //   return data.name
+    
+        }
+        getPokemon();
+
+    }, []);
+
 
 
     // JAVASCRIPT
-    
-    
-    //let comp = 0;
 
     const inc = function(){
         setComp(comp + 1);
@@ -32,6 +53,8 @@ export function Comptador() {
             <button onClick={() => inc()}>Incrementar</button>
             <button onClick={() => dec()}>Decrementar</button>
             <button onClick={() => res()}>Reiniciar</button>
+
+            <p>Nom {pokemon}</p> 
         </div>
     )  
 }
